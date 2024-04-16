@@ -1,0 +1,29 @@
+
+
+server:
+  port: 8090
+
+spring:
+  application:
+    name: gateway
+  cloud: 
+    gateway:
+      routes:
+      - id: studentModule
+        uri: lb://student-service
+        predicates: 
+        - Path=/student/**
+      - id: courseModule
+        uri: lb://course-service
+        predicates:
+        - Path=/course/**
+      - id: ucmModule
+        uri: lb://ucm-service
+        predicates:
+        - Path=/nimaiUCM/**
+        
+        
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka
